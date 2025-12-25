@@ -28,7 +28,7 @@ func (h *Handler) validateUUIDParams(req *dto.GetHistoryRequest) error {
 }
 
 func (h *Handler) getItemHistoryHandler(w http.ResponseWriter, r *http.Request) {
-	id, err := parseUUIDParam(r, "id")
+	id, err := parseUUIDParam(r)
 	if err != nil {
 		h.respondError(w, http.StatusBadRequest, err.Error())
 		return

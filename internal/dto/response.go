@@ -64,5 +64,6 @@ type HistoryExportResponse struct {
 
 type ItemWithMessageResponse struct {
 	ItemResponse
+
 	Message string `json:"message,omitempty"`
 }

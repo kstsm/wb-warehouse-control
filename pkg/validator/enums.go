@@ -16,12 +16,14 @@ const (
 	RoleViewer  Role = "viewer"
 )
 
+//nolint:gochecknoglobals // These are constant maps used for validation
 var AllowedActionTypes = map[ActionType]struct{}{
 	ActionCreate: {},
 	ActionUpdate: {},
 	ActionDelete: {},
 }
 
+//nolint:gochecknoglobals // These are constant maps used for validation
 var AllowedRoles = map[Role]struct{}{
 	RoleAdmin:   {},
 	RoleManager: {},

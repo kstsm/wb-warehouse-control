@@ -13,7 +13,8 @@ import (
 	"github.com/kstsm/wb-warehouse-control/internal/dto"
 )
 
-func parseUUIDParam(r *http.Request, param string) (uuid.UUID, error) {
+func parseUUIDParam(r *http.Request) (uuid.UUID, error) {
+	const param = "id"
 	value := chi.URLParam(r, param)
 	if strings.TrimSpace(value) == "" {
 		return uuid.Nil, fmt.Errorf("%s is required", param)

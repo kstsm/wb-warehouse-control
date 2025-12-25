@@ -44,12 +44,12 @@ func (h *Handler) createItemHandler(w http.ResponseWriter, r *http.Request) {
 	resp := converter.ItemToResponse(result)
 	h.respondJSON(w, http.StatusCreated, dto.ItemWithMessageResponse{
 		ItemResponse: resp,
-		Message:     "item created successfully",
+		Message:      "item created successfully",
 	})
 }
 
 func (h *Handler) getItemByIDHandler(w http.ResponseWriter, r *http.Request) {
-	itemID, err := parseUUIDParam(r, "id")
+	itemID, err := parseUUIDParam(r)
 	if err != nil {
 		h.respondError(w, http.StatusBadRequest, err.Error())
 		return
@@ -92,7 +92,7 @@ func (h *Handler) getItemsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) updateItemHandler(w http.ResponseWriter, r *http.Request) {
-	itemID, err := parseUUIDParam(r, "id")
+	itemID, err := parseUUIDParam(r)
 	if err != nil {
 		h.respondError(w, http.StatusBadRequest, err.Error())
 		return
@@ -129,12 +129,12 @@ func (h *Handler) updateItemHandler(w http.ResponseWriter, r *http.Request) {
 	resp := converter.ItemToResponse(result)
 	h.respondJSON(w, http.StatusOK, dto.ItemWithMessageResponse{
 		ItemResponse: resp,
-		Message:     "item updated successfully",
+		Message:      "item updated successfully",
 	})
 }
 
 func (h *Handler) deleteItemHandler(w http.ResponseWriter, r *http.Request) {
-	itemID, err := parseUUIDParam(r, "id")
+	itemID, err := parseUUIDParam(r)
 	if err != nil {
 		h.respondError(w, http.StatusBadRequest, err.Error())
 		return

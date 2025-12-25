@@ -24,6 +24,7 @@ const (
 
 type Claims struct {
 	jwt.RegisteredClaims
+
 	UserID uuid.UUID `json:"user_id"`
 	Role   Role      `json:"role"`
 }

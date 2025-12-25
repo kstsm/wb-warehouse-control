@@ -25,13 +25,13 @@ func AuthMiddleware(tokenValidator jwt.TokenValidator) func(http.Handler) http.H
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			token, ok := extractBearerToken(r)
 			if !ok {
-				respondError(w, http.StatusUnauthorized, "unauthorized")
+				respondError(w)
 				return
 			}
 
 			claims, err := tokenValidator.ValidateToken(token)
 			if err != nil {
-				respondError(w, http.StatusUnauthorized, "unauthorized")
+				respondError(w)
 				return
 			}
 
@@ -48,7 +48,7 @@ func RequireRole(allowed ...jwt.Role) func(http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			role, ok := RoleFromContext(r.Context())
 			if !ok {
-				respondError(w, http.StatusUnauthorized, "unauthorized")
+				respondError(w)
 				return
 			}
 
@@ -57,8 +57,7 @@ func RequireRole(allowed ...jwt.Role) func(http.Handler) http.Handler {
 				return
 			}
 
-			respondError(w, http.StatusUnauthorized, "unauthorized")
-
+			respondError(w)
 		})
 	}
 }
@@ -96,7 +95,11 @@ func extractBearerToken(r *http.Request) (string, bool) {
 	return token, true
 }
 
-func respondError(w http.ResponseWriter, status int, message string) {
+func respondError(w http.ResponseWriter) {
+	const (
+		status  = http.StatusUnauthorized
+		message = "unauthorized"
+	)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	err := json.NewEncoder(w).Encode(models.Error{Error: message})

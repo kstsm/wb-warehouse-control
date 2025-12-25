@@ -16,9 +16,9 @@ type ItemManager interface {
 }
 
 type Handler struct {
-	service       service.ItemManager
-	log           *slog.Logger
-	valid         *validator.Validate
+	service        service.ItemManager
+	log            *slog.Logger
+	valid          *validator.Validate
 	tokenValidator jwt.TokenValidator
 }
 
@@ -29,9 +29,9 @@ func NewHandler(
 	tokenValidator jwt.TokenValidator,
 ) ItemManager {
 	return &Handler{
-		service:       service,
-		log:           log,
-		valid:         valid,
+		service:        service,
+		log:            log,
+		valid:          valid,
 		tokenValidator: tokenValidator,
 	}
 }

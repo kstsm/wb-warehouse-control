@@ -144,4 +144,3 @@ func (r *Repository) DeleteItem(ctx context.Context, itemID uuid.UUID, userID *u
 
 	return nil
 }
-
